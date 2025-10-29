@@ -19,9 +19,17 @@ class MyApp extends StatelessWidget {
       // margin: const EdgeInsets.all(20),
       child: Column(
         children: const [
-          CustomCard(text: "OOP", color: Color(0xFFBBDEFB)),
+          CustomCard(text: "OOP", color: Color((0xFFBBDEFB))),
           CustomCard(text: "DART", color: Color(0xFF64B5F6)),
-          CustomCard(text: "FLUTTER", color: Color(0xFF1E88E5)), 
+          // Bonus
+          CustomCard(
+            text: "FLUTTER",
+            gradient: LinearGradient(
+              colors: [Color(0xFF4FA8F1), Color(0xFF2B1772)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          )
         ],
       ),
     );
@@ -32,11 +40,15 @@ class MyApp extends StatelessWidget {
 class CustomCard extends StatelessWidget {
   final String text;
   final Color color;
+  // Bonus
+  final Gradient? gradient;
 
   const CustomCard({
     super.key,
     required this.text,
     this.color = Colors.blue,
+    // Bonus
+    this.gradient,
   });
 
   @override
@@ -45,7 +57,10 @@ class CustomCard extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: color,
+        // Bonus
+        color: gradient == null ? color : null,
+        gradient: gradient,
+
         borderRadius: BorderRadius.circular(40),
       ),
       child: Center(
